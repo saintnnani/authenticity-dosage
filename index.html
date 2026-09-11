@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>正品与剂量确认</title>
+<meta name="description" content="THEMIIN CLINIC 济州 — 正品与剂量确认制度（中文）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* THEMIIN Recovery Guide — web edition
+   단일 라이트 테마: 브랜드 팔레트(크림/코랄/세이지)에 맞춰 의도적으로 고정.
+   삽화 34컷이 밝은 배경 기준으로 제작되어 다크 반전 시 도해가 깨짐. */
+:root{
+  --ink:#1F2A37; --body:#33414F; --muted:#6E7C88;
+  --line:#E8DFD9; --hair:#F0E9E4;
+  --accent:#C4766A; --accent-deep:#A85B50; --accent-soft:#F4E6E2;
+  --sage:#6F9187; --sage-soft:#E7EFEC;
+  --warn:#B23A2E; --warn-soft:#FBEBE8; --warn-line:#EFD3CD;
+  --cream:#FAF6F2; --paper:#FFFDFB; --ground:#F2EBE5;
+  --shadow:0 1px 2px rgba(76,52,44,.05), 0 12px 32px -12px rgba(76,52,44,.16);
+  --col:760px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:64px;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{transition:none!important;animation:none!important;}}
+body{
+  margin:0;background:var(--ground);color:var(--body);
+  font-family:"Noto Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:16px;line-height:1.9;letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent-deep);}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px;}
+
+/* ---------- 상단 바 ---------- */
+.bar{
+  position:sticky;top:0;z-index:50;background:rgba(255,253,251,.94);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line);
+}
+.bar-in{max-width:var(--col);margin:0 auto;padding:9px 18px;display:flex;align-items:center;gap:12px;}
+.wordmark{font-size:13px;font-weight:700;letter-spacing:.22em;color:var(--ink);text-decoration:none;white-space:nowrap;}
+.wordmark span{display:block;font-size:9px;letter-spacing:.16em;color:var(--accent);font-weight:500;margin-top:1px;}
+.bar-sp{flex:1;}
+.sos{
+  display:inline-flex;align-items:center;gap:6px;background:var(--warn);color:#fff;text-decoration:none;
+  font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 2px 8px -2px rgba(178,58,46,.5);
+}
+.sos:hover{background:#9C3125;}
+.sos svg{width:13px;height:13px;}
+
+/* ---------- 본문 컬럼 ---------- */
+.wrap{max-width:var(--col);margin:0 auto;background:var(--paper);box-shadow:var(--shadow);}
+@media (min-width:820px){ .wrap{margin:22px auto 40px;border-radius:10px;overflow:hidden;} }
+.pad{padding:0 22px;}
+@media (min-width:600px){ .pad{padding:0 40px;} }
+
+/* ---------- 히어로 ---------- */
+.hero{
+  background:linear-gradient(158deg,#FBF8F5 0%,#F5EDE8 60%,#EFE3DD 100%);
+  border-bottom:1px solid var(--line);padding:30px 22px 26px;
+  display:flex;gap:20px;align-items:center;
+}
+@media (min-width:600px){ .hero{padding:40px 40px 34px;gap:28px;} }
+.hero-txt{flex:1 1 auto;min-width:0;}
+.hero .eyebrow{font-size:10.5px;letter-spacing:.2em;color:var(--accent);font-weight:700;margin:0 0 8px;}
+.hero h1{
+  font-size:clamp(24px,6.4vw,33px);line-height:1.34;margin:0;color:var(--ink);font-weight:700;
+  letter-spacing:.01em;text-wrap:balance;
+}
+.hero .en{font-size:10.5px;letter-spacing:.34em;color:var(--muted);margin:11px 0 0;font-weight:500;}
+.medal{flex:0 0 auto;width:96px;height:96px;border-radius:50%;overflow:hidden;background:#FFFCFA;
+  border:1.5px solid rgba(196,118,106,.5);box-shadow:0 6px 18px -8px rgba(120,80,70,.45);}
+@media (min-width:600px){ .medal{width:124px;height:124px;} }
+.medal img{width:100%;height:auto;display:block;transform:translateY(-2%);}
+
+.note{background:var(--cream);border-bottom:1px solid var(--line);padding:15px 22px;font-size:13.5px;line-height:1.8;}
+@media (min-width:600px){ .note{padding:16px 40px;} }
+.note b{color:var(--ink);}
+
+/* ---------- 목차 ---------- */
+.toc{padding:26px 22px 4px;}
+@media (min-width:600px){ .toc{padding:32px 40px 6px;} }
+.toc h2{font-size:14px;letter-spacing:.06em;color:var(--ink);margin:0 0 3px;font-weight:700;}
+.toc .sub{font-size:12.5px;color:var(--muted);margin:0 0 18px;}
+.grp{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--sage);margin:20px 0 9px;
+  padding-bottom:6px;border-bottom:1px solid var(--hair);}
+.cards{display:grid;grid-template-columns:1fr;gap:8px;}
+@media (min-width:520px){ .cards{grid-template-columns:1fr 1fr;} }
+.card{
+  display:flex;gap:11px;align-items:flex-start;text-decoration:none;color:inherit;
+  border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:var(--paper);
+  transition:border-color .15s,background .15s;
+}
+.card:hover{border-color:var(--accent);background:#FFF9F7;}
+.card .n{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);
+  font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:2px;
+  font-variant-numeric:tabular-nums;
+}
+.card>span:last-child{flex:1 1 auto;min-width:0;}
+.card .t{display:block;font-size:14px;font-weight:700;color:var(--ink);line-height:1.45;}
+.card .d{display:block;font-size:11.5px;color:var(--muted);line-height:1.55;margin-top:3px;}
+.card.red{border-color:var(--warn-line);background:var(--warn-soft);}
+.card.red:hover{border-color:var(--warn);background:#F9DFDA;}
+.card.red .n{background:#F3D0CA;color:var(--warn);}
+.card.red .t{color:var(--warn);}
+.card.red .d{color:#8B3226;}
+
+/* ---------- 챕터 ---------- */
+.sec{padding:34px 22px 6px;border-top:1px solid var(--hair);margin-top:30px;}
+@media (min-width:600px){ .sec{padding:40px 40px 6px;} }
+.sec:first-of-type{border-top:0;margin-top:0;}
+.sec-head{display:flex;align-items:center;gap:11px;border-bottom:2px solid var(--accent);padding-bottom:9px;margin-bottom:16px;}
+.sec-num{flex:0 0 auto;width:27px;height:27px;border-radius:50%;background:var(--accent);color:#fff;
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
+.sec-title{font-size:clamp(17px,4.4vw,21px);font-weight:700;color:var(--ink);margin:0;line-height:1.35;text-wrap:balance;}
+.sec.danger .sec-head{border-bottom-color:var(--warn);}
+.sec.danger .sec-num{background:var(--warn);}
+.sec.danger .sec-title{color:var(--warn);}
+
+p{margin:0 0 13px;}
+strong{color:var(--ink);font-weight:700;}
+h3{font-size:15.5px;color:var(--accent-deep);font-weight:700;margin:26px 0 9px;padding-left:10px;
+   border-left:3px solid var(--accent-soft);line-height:1.5;}
+.lead{background:var(--cream);border-left:3px solid var(--sage);padding:14px 16px;margin:0 0 18px;
+  font-size:15px;border-radius:0 6px 6px 0;}
+.lead p:last-child{margin-bottom:0;}
+
+ul{margin:8px 0 14px;padding:0;list-style:none;}
+li{position:relative;padding-left:17px;margin-bottom:6px;font-size:15px;}
+li:before{content:"";position:absolute;left:3px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+ul.check li:before{background:var(--sage);}
+ul.warn li:before{background:var(--warn);}
+
+/* ---------- 콜아웃 ---------- */
+.box{border-radius:8px;padding:14px 16px;margin:18px 0;font-size:15px;}
+.box .box-t{font-weight:700;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px;line-height:1.5;}
+.box p:last-child{margin-bottom:0;}
+.box-warn{background:var(--warn-soft);border:1px solid var(--warn-line);color:#7C2C22;}
+.box-warn .box-t{color:var(--warn);}
+.box-warn strong{color:#7C2C22;}
+.box-tip{background:var(--sage-soft);border:1px solid #D6E3DE;color:#2E4B44;}
+.box-tip .box-t{color:#4E6E66;}
+.box-tip strong{color:#223B35;}
+.box-note{background:var(--cream);border:1px solid var(--line);}
+.box-note .box-t{color:var(--accent-deep);}
+
+/* ---------- 도해 ---------- */
+figure{margin:20px 0 22px;}
+.fig-band{background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:13px 12px 11px;}
+.fig-band.tint-sage{background:var(--sage-soft);border-color:#D6E3DE;}
+.fig-band.tint-warn{background:var(--warn-soft);border-color:var(--warn-line);}
+.fig-band.grid2{display:flex;flex-wrap:wrap;gap:10px;}
+.fig-band.grid2>div{flex:1 1 260px;min-width:0;}
+svg{display:block;width:100%;height:auto;}
+figcaption{font-size:12.5px;color:var(--muted);line-height:1.7;margin-top:9px;padding:0 2px;}
+.photo{height:auto;display:flex;align-items:center;justify-content:center;}
+.photo img{max-width:100%;height:auto;}
+.ph-lab{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:700;margin-top:8px;}
+.ph-lab.ok{color:#2E4B44;} .ph-lab.no{color:var(--warn);}
+.ph-lab svg{width:19px;height:19px;flex:0 0 auto;}
+.ph-sub{font-size:12.5px;color:var(--muted);margin-top:3px;padding-left:26px;line-height:1.6;}
+
+/* ---------- 표 ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border-radius:8px;border:1px solid var(--line);}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:420px;}
+th{background:var(--accent);color:#fff;font-weight:600;padding:10px 13px;text-align:left;font-size:13.5px;}
+td{padding:10px 13px;border-bottom:1px solid var(--hair);vertical-align:top;}
+tr:last-child td{border-bottom:0;}
+
+/* ---------- 응급 전화 ---------- */
+.calls{display:grid;grid-template-columns:1fr;gap:10px;margin:20px 0 6px;}
+@media (min-width:480px){ .calls{grid-template-columns:1fr 1fr;} }
+.call{
+  display:flex;align-items:center;gap:13px;text-decoration:none;background:var(--warn);color:#fff;
+  border-radius:10px;padding:15px 18px;box-shadow:0 3px 14px -6px rgba(178,58,46,.7);
+}
+.call:hover{background:#9C3125;}
+.call svg{width:26px;height:26px;flex:0 0 auto;}
+.call>span:last-child{flex:1 1 auto;min-width:0;}
+.call .r{display:block;font-size:11.5px;letter-spacing:.1em;opacity:.9;font-weight:500;}
+.call .num{display:block;font-size:23px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums;}
+.callnote{font-size:12.5px;color:var(--muted);margin:10px 0 0;}
+
+/* ---------- 마무리 ---------- */
+.promise{
+  margin:38px 0 0;background:linear-gradient(155deg,#FBF8F5,#F2E9E4);border-top:1px solid var(--line);
+  padding:38px 24px 40px;text-align:center;
+}
+.promise svg{width:96px;margin:0 auto 14px;}
+.promise h2{font-size:17px;letter-spacing:.1em;color:var(--ink);margin:0 0 4px;font-weight:700;}
+.promise .zh{font-size:14px;color:var(--accent);font-weight:700;margin:0 0 20px;letter-spacing:.04em;}
+.promise p{font-size:15px;line-height:2;margin:0 0 12px;}
+.promise .big-line{font-size:17px;color:var(--ink);font-weight:700;line-height:1.85;margin-top:22px;}
+.promise .sig{margin-top:24px;font-size:12px;letter-spacing:.18em;color:var(--muted);line-height:1.9;}
+
+.foot{padding:20px 22px 30px;text-align:center;font-size:11.5px;color:var(--muted);line-height:1.9;}
+
+/* ---------- 목차 복귀 ---------- */
+.totop{
+  position:fixed;right:14px;bottom:14px;z-index:40;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:12.5px;font-weight:700;
+  text-decoration:none;box-shadow:0 3px 14px -6px rgba(76,52,44,.5);
+}
+.totop:hover{border-color:var(--accent);color:var(--accent-deep);}
+
+/* ---------- 인쇄 ---------- */
+@media print{
+  body{background:#fff;} .bar,.totop{display:none;}
+  .wrap{max-width:none;box-shadow:none;margin:0;border-radius:0;}
+  .sec{page-break-before:always;border-top:0;margin-top:0;}
+  figure,.box,.tw{page-break-inside:avoid;}
+  .card{break-inside:avoid;}
+}
+
+/* ---------- 正品·剂量 확인 문서 전용 ---------- */
+.sos-sage{background:var(--sage);box-shadow:0 2px 8px -2px rgba(111,145,135,.6);}
+.sos-sage:hover{background:#5C7B72;}
+.mark{flex:0 0 auto;width:96px;height:96px;}
+@media (min-width:600px){ .mark{width:120px;height:120px;} }
+.mark svg{width:100%;height:auto;}
+.quote{background:var(--ink);color:#F3EDE9;padding:22px;border-bottom:1px solid var(--line);}
+@media (min-width:600px){ .quote{padding:26px 40px;} }
+.quote .q{font-size:clamp(16px,4.4vw,20px);font-weight:700;color:#fff;margin:0 0 8px;letter-spacing:.02em;line-height:1.6;}
+.quote .qs{font-size:13.5px;line-height:1.85;margin:0;color:#C6CFD7;}
+.cap-en{font-weight:500;letter-spacing:.16em;color:var(--muted);font-size:11px;}
+.sage-num{background:var(--sage)!important;}
+.card.sage{border-color:#D6E3DE;background:var(--sage-soft);}
+.card.sage:hover{border-color:var(--sage);background:#DCEAE5;}
+.card.sage .n{background:#CBDED7;color:#3F5E56;}
+.dual{display:grid;gap:11px;grid-template-columns:1fr;margin:16px 0 20px;}
+@media (min-width:640px){ .dual{grid-template-columns:1fr 1fr;align-items:start;} }
+.vbox{border:1px solid;border-radius:9px;padding:14px 16px 12px;}
+.vbox h4{margin:0 0 8px;font-size:13px;font-weight:700;letter-spacing:.06em;
+  padding-bottom:7px;border-bottom:1px solid;}
+.vbox ul{margin:0;}
+.vbox li{font-size:14px;margin-bottom:5px;line-height:1.75;}
+.vbox li b{color:var(--ink);font-weight:700;}
+.vbox.id{border-color:#EDD9D3;background:#FFFAF8;}
+.vbox.id h4{color:var(--accent-deep);border-bottom-color:#F2E1DC;}
+.vbox.qty{border-color:#D6E3DE;background:#F7FBF9;}
+.vbox.qty h4{color:#4E6E66;border-bottom-color:#DDEAE5;}
+.vbox.qty li b{color:#2E4B44;}
+.pnl{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;}
+.pnl.ok{border-color:#D6E3DE;}
+.pnl.warn{border-color:var(--warn-line);}
+.closing{margin-top:34px;background:linear-gradient(155deg,#FBF8F5,#F1E9E4);border-top:1px solid var(--line);
+  padding:36px 24px 38px;text-align:center;}
+.closing .c-title{font-size:12px;letter-spacing:.18em;color:var(--accent);font-weight:700;margin:0 0 18px;}
+.closing p{font-size:15px;line-height:2;margin:0 0 14px;}
+.closing .c-sig{margin-top:26px;font-size:12px;letter-spacing:.18em;color:var(--muted);line-height:1.9;}
+.closing .c-sig span{font-size:10.5px;letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <a class="wordmark" href="#top">THEMIIN CLINIC<span>JEJU · 整形外科 · 皮肤科</span></a>
+  <div class="bar-sp"></div>
+  <a class="sos sos-sage" href="#ch7">Care Passport</a>
+</div></div>
+
+<div class="wrap" id="top">
+  <div class="hero">
+    <div class="hero-txt">
+      <p class="eyebrow">AUTHENTICITY &amp; DOSAGE</p>
+      <h1>正品与剂量<br>确认制度</h1>
+      <p class="en">THEMIIN CLINIC · JEJU</p>
+    </div>
+    <div class="mark">
+      <svg viewBox="0 0 120 120" role="img" aria-label="正品确认标志">
+        <circle cx="60" cy="60" r="56" fill="#FFFCFA" stroke="#E0C7BE" stroke-width="1.2"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#6F9187" stroke-width="1" stroke-dasharray="3 4" opacity=".55"/>
+        <g fill="none" stroke="#C4766A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M48 34 L72 34 L72 42 L66 48 L66 84 C66 88 63 90 60 90 C57 90 54 88 54 84 L54 48 L48 42 Z"/>
+          <path d="M46 30 L74 30" stroke-width="3"/>
+        </g>
+        <path d="M54 62 L66 62" stroke="#C4766A" stroke-width="1.4" opacity=".55"/>
+        <g transform="translate(82,78)">
+          <circle r="17" fill="#6F9187"/>
+          <path d="M-7 1 l4.5 4.5 l9.5 -10.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p class="q">正品当面拆封，剂量当面确认。</p>
+    <p class="qs">记录产品名称、有效期、批号、配制剂量及实际使用剂量，治疗结束后将完整记录填写在 Care Passport 中。</p>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <h2>目录 <span class="cap-en">CONTENTS</span></h2>
+    <p class="sub">每个项目都按<b>正品确认</b>与<b>剂量确认</b>两部分说明。</p>
+    <div class="grp">注射类</div>
+    <div class="cards">
+      <a class="card" href="#ch1"><span class="n">1</span><span><span class="t">肉毒素</span><span class="d">药瓶标示 · 当面稀释 · 单位数记录</span></span></a>
+      <a class="card" href="#ch2"><span class="n">2</span><span><span class="t">填充剂（玻尿酸）</span><span class="d">外盒与针管批号一致 · 剩余量废弃</span></span></a>
+      <a class="card" href="#ch3"><span class="n">3</span><span><span class="t">Juvelook · Sculptra · Re2O</span><span class="d">原产品 mg 与配制过程一并公开</span></span></a>
+      <a class="card" href="#ch4"><span class="n">4</span><span><span class="t">Rejuran</span><span class="d">泡罩包装状态 · 装载前后剂量核对</span></span></a>
+    </div>
+    <div class="grp">能量设备类</div>
+    <div class="cards">
+      <a class="card" href="#ch5"><span class="n">5</span><span><span class="t">Ultherapy 超声提升</span><span class="d">正式设备 · 正品探头 · 实际发射线数</span></span></a>
+      <a class="card" href="#ch6"><span class="n">6</span><span><span class="t">Thermage FLX</span><span class="d">正品治疗头 · 实际使用发数</span></span></a>
+    </div>
+    <div class="grp">记录</div>
+    <div class="cards">
+      <a class="card sage" href="#ch7"><span class="n">7</span><span><span class="t">Care Passport 记录表</span><span class="d">患者 · 产品 · 配制 · 实际使用量 · 差异说明</span></span></a>
+    </div>
+  </nav>
+
+  <div class="pad">
+
+  <!-- ===== 공통 원칙 ===== -->
+  <div class="sec" id="intro">
+    <div class="sec-head">
+      <div class="sec-num sage-num">◆</div>
+      <h2 class="sec-title">五个共同确认步骤</h2>
+    </div>
+    <p class="lead">无论接受哪一种治疗，THEMIIN 都在<strong>患者面前</strong>完成以下五个步骤。您可以随时要求医护人员再次出示任何一项。</p>
+
+    <figure>
+      <div class="fig-band">
+        <svg viewBox="0 0 540 128">
+          <defs><marker id="vf1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#C4766A"/></marker></defs>
+          <line x1="30" y1="44" x2="516" y2="44" stroke="#E3D6CE" stroke-width="2.2" marker-end="url(#vf1)"/>
+          <g font-family="Noto Sans SC" text-anchor="middle">
+            <g transform="translate(54,44)">
+              <circle r="17" fill="#C4766A"/><text y="4.5" fill="#fff" font-size="11" font-weight="700">1</text>
+              <text y="38" fill="#1F2A37" font-size="9.4" font-weight="700">产品名 · 制造商</text>
+              <text y="52" fill="#6E7C88" font-size="8.2">国产 / 进口区分</text>
+            </g>
+            <g transform="translate(172,44)">
+              <circle r="17" fill="#CC8578"/><text y="4.5" fill="#fff" font-size="11" font-weight="700">2</text>
+              <text y="38" fill="#1F2A37" font-size="9.4" font-weight="700">批号 · 有效期</text>
+              <text y="52" fill="#6E7C88" font-size="8.2">LOT / EXP</text>
+            </g>
+            <g transform="translate(280,44)">
+              <circle r="17" fill="#D59A8E"/><text y="4.5" fill="#fff" font-size="11" font-weight="700">3</text>
+              <text y="38" fill="#1F2A37" font-size="9.4" font-weight="700">封口 · 包装状态</text>
+              <text y="52" fill="#6E7C88" font-size="8.2">未开封确认</text>
+            </g>
+            <g transform="translate(390,44)">
+              <circle r="17" fill="#6F9187"/><text y="4.5" fill="#fff" font-size="11" font-weight="700">4</text>
+              <text y="38" fill="#1F2A37" font-size="9.4" font-weight="700">当面拆封</text>
+              <text y="52" fill="#6E7C88" font-size="8.2">配制过程可见</text>
+            </g>
+            <g transform="translate(486,44)">
+              <circle r="17" fill="#4E6E66"/><text y="4.5" fill="#fff" font-size="11" font-weight="700">5</text>
+              <text y="38" fill="#1F2A37" font-size="9.4" font-weight="700">记录</text>
+              <text y="52" fill="#6E7C88" font-size="8.2">Care Passport</text>
+            </g>
+          </g>
+          <text x="270" y="120" font-family="Noto Sans SC" font-size="8.4" fill="#6E7C88" text-anchor="middle">配制量与实际使用量分开记录，两者不一致时一并记录原因。</text>
+        </svg>
+      </div>
+      <figcaption>图 1 ｜ 所有项目通用的五个确认步骤</figcaption>
+    </figure>
+  </div>
+
+  <!-- ===== 1. 肉毒素 ===== -->
+  <div class="sec" id="ch1">
+    <div class="sec-head"><div class="sec-num">1</div><h2 class="sec-title">肉毒素</h2></div>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>准确的产品名称与制造商</li>
+          <li>国产 / 进口的区分</li>
+          <li>药瓶标示容量：例如 50U、100U</li>
+          <li>生产批号（LOT）</li>
+          <li>有效期</li>
+          <li>药瓶瓶盖与封口状态</li>
+          <li>在患者面前开瓶并稀释</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>高端肉毒素</h4>
+        <ul class="check">
+          <li>高端产品尽可能<b>一人一瓶</b>使用</li>
+          <li>患者面前确认未开封药瓶</li>
+          <li>当面展示稀释过程</li>
+          <li>由担当医生说明各部位的注射单位数</li>
+          <li>将 LOT 标签贴在 Care Passport 上</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-band">
+        <svg viewBox="0 0 540 178">
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M126 44 L186 44 L186 56 L177 66 L177 140 C177 148 170 152 156 152 C142 152 135 148 135 140 L135 66 L126 56 Z"
+                  fill="#FBF1EC" stroke="#C4766A" stroke-width="2"/>
+            <rect x="130" y="30" width="52" height="15" rx="3" fill="#E7EFEC" stroke="#6F9187" stroke-width="2"/>
+            <rect x="137" y="20" width="38" height="12" rx="3" fill="#F4E6E2" stroke="#C4766A" stroke-width="1.6"/>
+            <rect x="136" y="82" width="40" height="48" rx="3" fill="#fff" stroke="#DDC7BF" stroke-width="1.2"/>
+            <path d="M141 92 L171 92 M141 102 L166 102 M141 112 L171 112 M141 121 L162 121" stroke="#C4766A" stroke-width="1.6" opacity=".55"/>
+            <g stroke="#C9BDB5" stroke-width="1">
+              <path d="M186 26 L246 26"/><path d="M186 38 L246 38"/><path d="M178 96 L246 96"/><path d="M178 118 L246 118"/>
+              <path d="M126 140 L92 140"/>
+            </g>
+          </g>
+          <g font-family="Noto Sans SC" font-size="9.2" fill="#1F2A37">
+            <text x="252" y="29" font-weight="700">瓶盖 · 封口状态</text>
+            <text x="252" y="41" font-weight="700">未开封确认</text>
+            <text x="252" y="99" font-weight="700">产品名 · 制造商 · 标示容量</text>
+            <text x="252" y="121" font-weight="700">批号（LOT）· 有效期</text>
+            <text x="88" y="143" text-anchor="end" font-weight="700" fill="#4E6E66">当面开瓶</text>
+          </g>
+          <g font-family="Noto Sans SC" font-size="8.2" fill="#6E7C88">
+            <text x="252" y="53">开封前由患者本人确认</text>
+            <text x="252" y="111">50U / 100U 等</text>
+            <text x="252" y="133">与外盒记载一致</text>
+            <text x="88" y="155" text-anchor="end">稀释过程可见</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>图 2 ｜ 肉毒素药瓶上需要一起确认的四个位置</figcaption>
+    </figure>
+
+    <h3>关于稀释浓度</h3>
+    <p>面部肉毒素通常在治疗后数日内开始显现变化。如果一周内完全没有变化，除个人体质与注射单位数之外，<strong>稀释浓度</strong>也是需要一并考虑的因素之一。</p>
+    <p>标准配制为<strong>每 100U 加入约 2.5cc 生理盐水</strong>。行业内也存在每 100U 加入 4cc、甚至 8cc 生理盐水的情况；此时相同注射体积中所含的实际单位数会明显降低。</p>
+
+    <figure>
+      <div class="fig-band grid2">
+        <div class="pnl ok">
+          <svg viewBox="0 0 250 128">
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M96 24 L154 24 L154 34 L146 44 L146 104 C146 110 138 113 125 113 C112 113 104 110 104 104 L104 44 L96 34 Z"
+                    fill="#fff" stroke="#6F9187" stroke-width="2"/>
+              <path d="M104 78 L146 78 C146 78 146 104 146 104 C146 110 138 113 125 113 C112 113 104 110 104 104 Z" fill="#D9E7E2" stroke="none"/>
+              <path d="M104 78 L146 78" stroke="#6F9187" stroke-width="1.6"/>
+              <g stroke="#6F9187" stroke-width="1.2" opacity=".6">
+                <path d="M104 62 L112 62 M104 70 L112 70 M104 86 L112 86 M104 94 L112 94"/>
+              </g>
+            </g>
+            <g font-family="Noto Sans SC" text-anchor="middle">
+              <text x="125" y="16" font-size="9.4" font-weight="700" fill="#2E4B44">标准配制</text>
+              <text x="125" y="126" font-size="9.6" font-weight="700" fill="#2E4B44">100U + 生理盐水 2.5cc</text>
+            </g>
+          </svg>
+        </div>
+        <div class="pnl warn">
+          <svg viewBox="0 0 250 128">
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M96 24 L154 24 L154 34 L146 44 L146 104 C146 110 138 113 125 113 C112 113 104 110 104 104 L104 44 L96 34 Z"
+                    fill="#fff" stroke="#B23A2E" stroke-width="2"/>
+              <path d="M104 50 L146 50 C146 50 146 104 146 104 C146 110 138 113 125 113 C112 113 104 110 104 104 Z" fill="#F3D9D4" stroke="none"/>
+              <path d="M104 50 L146 50" stroke="#B23A2E" stroke-width="1.6"/>
+              <g stroke="#B23A2E" stroke-width="1.2" opacity=".5">
+                <path d="M104 62 L112 62 M104 70 L112 70 M104 86 L112 86 M104 94 L112 94"/>
+              </g>
+              <path d="M168 50 L168 113" stroke="#B23A2E" stroke-width="1" stroke-dasharray="3 3"/>
+              <path d="M164 54 L168 50 L172 54 M164 109 L168 113 L172 109" stroke="#B23A2E" stroke-width="1.4"/>
+            </g>
+            <g font-family="Noto Sans SC">
+              <text x="125" y="16" font-size="9.4" font-weight="700" fill="#B23A2E" text-anchor="middle">过度稀释的情况</text>
+              <text x="176" y="84" font-size="8.2" fill="#B23A2E">液量增加</text>
+              <text x="125" y="126" font-size="9.6" font-weight="700" fill="#B23A2E" text-anchor="middle">100U + 生理盐水 4 ~ 8cc</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <figcaption>图 3 ｜ 药瓶内的总单位数相同，但稀释液量越多，相同注射体积中的实际单位数越低。THEMIIN 在患者面前完成稀释，并记录生理盐水用量与各部位注射单位数。</figcaption>
+    </figure>
+
+    <div class="box box-note">
+      <div class="box-t">📌 请这样要求</div>
+      <p>「请让我看未开封的药瓶」「请告诉我加入了多少生理盐水」「请告诉我每个部位注射了多少单位」——这三个问题随时都可以提出。</p>
+    </div>
+  </div>
+
+  <!-- ===== 2. 필러 ===== -->
+  <div class="sec" id="ch2">
+    <div class="sec-head"><div class="sec-num">2</div><h2 class="sec-title">填充剂（玻尿酸）</h2></div>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>外盒的产品名称与具体型号</li>
+          <li>制造商 · 进口商</li>
+          <li>批号（LOT）· 有效期</li>
+          <li><b>外盒与每一支针管的批号一致</b></li>
+          <li>随附的正品标签或患者追踪标签</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>剂量确认</h4>
+        <ul class="check">
+          <li>在患者面前拆封</li>
+          <li>由担当医生说明各部位的计划注射量</li>
+          <li>治疗结束后确认实际使用量</li>
+          <li><b>剩余量当场废弃</b>，不留存至下次或用于他人</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. 콜라겐 자극 ===== -->
+  <div class="sec" id="ch3">
+    <div class="sec-head"><div class="sec-num">3</div><h2 class="sec-title">Juvelook · Sculptra · Re2O</h2></div>
+
+    <p class="lead">这一类产品与一般的液态水光针不同，需要经过<strong>配制（稀释 · 水化）</strong>后使用。因此不能只公开最终的 cc 数，还必须一并公开<strong>原产品的 mg 含量与配制过程</strong>。其中 <strong>Elravie Re2O</strong> 为基于无细胞异体真皮基质（hADM）的人体组织类产品。</p>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>产品名称：例如 Elravie Re2O</li>
+          <li>每盒的构成数量</li>
+          <li>批号（LOT）· 有效期</li>
+          <li>外盒与针管标签一致</li>
+          <li>在患者面前拆封</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>剂量确认 — 三个数值</h4>
+        <ul class="check">
+          <li>原产品含量：例如 150mg × 1</li>
+          <li>加入的配制液种类与用量</li>
+          <li>最终配制量与实际注入量</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-band tint-sage">
+        <svg viewBox="0 0 540 132">
+          <defs><marker id="vf2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#6F9187"/></marker></defs>
+          <g font-family="Noto Sans SC">
+            <g transform="translate(16,26)">
+              <rect width="148" height="58" rx="7" fill="#fff" stroke="#CFE0DA" stroke-width="1.2"/>
+              <text x="74" y="24" font-size="9.4" font-weight="700" fill="#1F2A37" text-anchor="middle">① 原产品含量</text>
+              <text x="74" y="42" font-size="11" font-weight="700" fill="#4E6E66" text-anchor="middle">150 mg × 1</text>
+            </g>
+            <g transform="translate(196,26)">
+              <rect width="148" height="58" rx="7" fill="#fff" stroke="#CFE0DA" stroke-width="1.2"/>
+              <text x="74" y="24" font-size="9.4" font-weight="700" fill="#1F2A37" text-anchor="middle">② 配制液</text>
+              <text x="74" y="42" font-size="9.6" font-weight="700" fill="#4E6E66" text-anchor="middle">种类 · 加入量</text>
+            </g>
+            <g transform="translate(376,26)">
+              <rect width="148" height="58" rx="7" fill="#fff" stroke="#CFE0DA" stroke-width="1.2"/>
+              <text x="74" y="24" font-size="9.4" font-weight="700" fill="#1F2A37" text-anchor="middle">③ 最终配制量</text>
+              <text x="74" y="42" font-size="9.6" font-weight="700" fill="#4E6E66" text-anchor="middle">与实际注入量</text>
+            </g>
+            <line x1="170" y1="55" x2="190" y2="55" stroke="#6F9187" stroke-width="1.6" marker-end="url(#vf2)"/>
+            <line x1="350" y1="55" x2="370" y2="55" stroke="#6F9187" stroke-width="1.6" marker-end="url(#vf2)"/>
+            <g transform="translate(16,96)">
+              <rect width="508" height="24" rx="12" fill="#DCE9E4"/>
+              <g transform="translate(20,12)"><circle r="8" fill="#6F9187"/>
+                <path d="M-3.5 0 l2.5 2.5 l5 -5.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+              <text x="38" y="16" font-size="9.2" font-weight="700" fill="#2E4B44">配制后的全部剂量都用于本人，剩余量当场废弃并记录。</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <figcaption>图 4 ｜ 胶原刺激类注射必须一起记录的三个数值</figcaption>
+    </figure>
+
+    <div class="box box-note">
+      <div class="box-t">📌 为什么要确认「全部使用」</div>
+      <p>以灭菌注射用水配制后，可能出现<strong>未全部使用、剩余 30%～50% 的情况</strong>。为避免配制后的剂量被用于他人，THEMIIN 会确认本次配制的全部剂量均用于患者本人，并将实际注入量记录在 Care Passport 中。</p>
+    </div>
+  </div>
+
+  <!-- ===== 4. 리쥬란 ===== -->
+  <div class="sec" id="ch4">
+    <div class="sec-head"><div class="sec-num">4</div><h2 class="sec-title">Rejuran</h2></div>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>外盒与每一支针管的标签</li>
+          <li>各产品对应的容量</li>
+          <li>批号（LOT）· 有效期</li>
+          <li>泡罩（blister）包装状态</li>
+          <li>在患者面前拆封</li>
+          <li>将带有条形码的标签交给患者本人</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>剂量确认</h4>
+        <ul class="check">
+          <li>装载到针管前的容量</li>
+          <li>设备设定的注入量</li>
+          <li>实际注入患者的剂量</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. 울쎄라 ===== -->
+  <div class="sec" id="ch5">
+    <div class="sec-head"><div class="sec-num">5</div><h2 class="sec-title">Ultherapy 超声提升</h2></div>
+
+    <p class="lead">Ultherapy 的「正品」不只是设备主机的问题。<strong>正规设备、正品探头、实际发射的线数</strong>三者都需要确认。</p>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>设备名称：Ultherapy 或 Ultherapy PRIME</li>
+          <li>主机机身编号</li>
+          <li>探头（transducer）外包装</li>
+          <li>探头型号与作用深度</li>
+          <li>探头编号与有效期</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>剂量确认 — 请看这两个画面</h4>
+        <ul class="check">
+          <li>治疗中使用的探头深度</li>
+          <li>治疗结束后的 Patient Total Lines 画面</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-band">
+        <svg viewBox="0 0 540 168">
+          <g>
+            <rect x="16" y="30" width="250" height="26" fill="#F7E3DC" stroke="#E0BCB2" stroke-width="1"/>
+            <rect x="16" y="56" width="250" height="40" fill="#F2D5CC" stroke="#DDB0A5" stroke-width="1"/>
+            <rect x="16" y="96" width="250" height="30" fill="#FBEFC9" stroke="#E3CE97" stroke-width="1"/>
+            <rect x="16" y="126" width="250" height="24" fill="#E4D9E4" stroke="#C3B2C3" stroke-width="1"/>
+          </g>
+          <g font-family="Noto Sans SC" font-size="8.4" fill="#5E4B44">
+            <text x="24" y="47">表皮层</text><text x="24" y="80">真皮层</text>
+            <text x="24" y="115">皮下脂肪层</text><text x="24" y="142">SMAS 筋膜层</text>
+          </g>
+          <g stroke-linecap="round">
+            <g stroke="#C4766A" stroke-width="2"><path d="M96 22 L96 50" stroke-dasharray="4 3"/><path d="M91 50 L96 58 L101 50" fill="none"/></g>
+            <g stroke="#C9A227" stroke-width="2"><path d="M158 22 L158 90" stroke-dasharray="4 3"/><path d="M153 90 L158 98 L163 90" fill="none"/></g>
+            <g stroke="#6F9187" stroke-width="2"><path d="M224 22 L224 132" stroke-dasharray="4 3"/><path d="M219 132 L224 140 L229 132" fill="none"/></g>
+          </g>
+          <g font-family="Noto Sans SC" font-size="8.6" font-weight="700" text-anchor="middle">
+            <text x="96" y="16" fill="#C4766A">1.5mm</text>
+            <text x="158" y="16" fill="#9A7A18">3.0mm</text>
+            <text x="224" y="16" fill="#4E6E66">4.5mm</text>
+          </g>
+          <g transform="translate(292,26)" font-family="Noto Sans SC">
+            <rect width="232" height="104" rx="8" fill="#1F2A37"/>
+            <rect x="12" y="12" width="208" height="30" rx="4" fill="#2C3946"/>
+            <text x="24" y="31" font-size="9" fill="#9DB2C4">实时超声影像 · 确认组织层</text>
+            <text x="24" y="62" font-size="8.6" fill="#9DB2C4" letter-spacing="1">PATIENT TOTAL LINES</text>
+            <rect x="22" y="70" width="86" height="26" rx="4" fill="none" stroke="#6F9187" stroke-width="1.4" stroke-dasharray="4 3"/>
+            <text x="65" y="88" font-size="11" fill="#8FB3A8" text-anchor="middle" font-weight="700">— — —</text>
+            <text x="120" y="80" font-size="8.2" fill="#7E93A6">治疗结束后</text>
+            <text x="120" y="92" font-size="8.2" fill="#7E93A6">与患者一同确认</text>
+          </g>
+          <text x="16" y="164" font-family="Noto Sans SC" font-size="8.2" fill="#6E7C88">※ 深度示意图。实际使用的探头深度与线数由担当医生根据部位和皮肤状态决定。</text>
+        </svg>
+      </div>
+      <figcaption>图 5 ｜ Ultherapy 通过实时超声影像确认组织层，并选择 1.5mm · 3.0mm · 4.5mm 深度。官方 IFU 画面会显示患者总线数与各部位的发射线数。</figcaption>
+    </figure>
+  </div>
+
+  <!-- ===== 6. 써마지 ===== -->
+  <div class="sec" id="ch6">
+    <div class="sec-head"><div class="sec-num">6</div><h2 class="sec-title">Thermage FLX</h2></div>
+
+    <p class="lead">Thermage 需要确认<strong>正品 FLX 设备、正品一次性治疗头、治疗头种类，以及实际使用的发数（pulse）</strong>。</p>
+
+    <div class="dual">
+      <div class="vbox id">
+        <h4>正品确认</h4>
+        <ul>
+          <li>设备名称：Thermage FLX</li>
+          <li>主机机身编号</li>
+          <li>未开封的正品治疗头外盒</li>
+          <li>Total · Eye · Body 治疗头区分</li>
+          <li>治疗头的尺寸与规格</li>
+          <li>批号（LOT）· 有效期 · 封条状态</li>
+          <li>在患者面前拆封并装载到设备</li>
+          <li>设备正常识别治疗头，确认初始发数</li>
+        </ul>
+      </div>
+      <div class="vbox qty">
+        <h4>剂量确认</h4>
+        <ul class="check">
+          <li>治疗头标示的总发数</li>
+          <li>开始前的剩余发数</li>
+          <li>结束后的剩余发数</li>
+          <li>实际使用的发数</li>
+          <li>能量等级范围</li>
+        </ul>
+      </div>
+    </div>
+
+    <figure>
+      <div class="fig-band">
+        <svg viewBox="0 0 540 116">
+          <g font-family="Noto Sans SC">
+            <g transform="translate(16,20)">
+              <rect width="140" height="56" rx="7" fill="#fff" stroke="#E8DFD9" stroke-width="1.2"/>
+              <text x="70" y="22" font-size="9" fill="#6E7C88" text-anchor="middle">开始前剩余发数</text>
+              <text x="70" y="42" font-size="13" font-weight="700" fill="#1F2A37" text-anchor="middle">A</text>
+            </g>
+            <text x="172" y="56" font-size="18" fill="#C4766A" text-anchor="middle" font-weight="700">−</text>
+            <g transform="translate(188,20)">
+              <rect width="140" height="56" rx="7" fill="#fff" stroke="#E8DFD9" stroke-width="1.2"/>
+              <text x="70" y="22" font-size="9" fill="#6E7C88" text-anchor="middle">结束后剩余发数</text>
+              <text x="70" y="42" font-size="13" font-weight="700" fill="#1F2A37" text-anchor="middle">B</text>
+            </g>
+            <text x="344" y="56" font-size="18" fill="#C4766A" text-anchor="middle" font-weight="700">=</text>
+            <g transform="translate(360,20)">
+              <rect width="164" height="56" rx="7" fill="#F4E6E2" stroke="#DFBDB4" stroke-width="1.4"/>
+              <text x="82" y="22" font-size="9" fill="#A85B50" text-anchor="middle" font-weight="700">实际使用发数</text>
+              <text x="82" y="42" font-size="13" font-weight="700" fill="#A85B50" text-anchor="middle">A − B</text>
+            </g>
+            <text x="270" y="102" font-size="8.4" fill="#6E7C88" text-anchor="middle">两个数值都在设备画面上与患者一同确认，并记录在 Care Passport 中。</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>图 6 ｜ 实际使用发数的确认方法</figcaption>
+    </figure>
+
+    <div class="box box-note">
+      <div class="box-t">📌 发数能证明什么，不能证明什么</div>
+      <p>设备画面上的发数可以证明<strong>发射次数</strong>，但并不能同时证明部位选择、能量设定、方向（vector）与重叠是否恰当。因此，<strong>担当医生细致的治疗设计</strong>同样重要。</p>
+    </div>
+  </div>
+
+  <!-- ===== 7. Care Passport ===== -->
+  <div class="sec" id="ch7">
+    <div class="sec-head"><div class="sec-num sage-num">7</div><h2 class="sec-title">Care Passport 记录表</h2></div>
+
+    <p class="lead">以下内容会记录在您的 Care Passport 中。<strong>配制量与实际使用量分开记录</strong>，如果计划量与实际量不同，会一并记录差异与原因。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:32%;">区分</th><th>记录项目</th></tr>
+        <tr><td>患者</td><td>患者编号、姓名、治疗日期</td></tr>
+        <tr><td>担当医生</td><td>咨询 · 设计 · 最终确认</td></tr>
+        <tr><td>产品</td><td>产品名称、具体产品线、制造商</td></tr>
+        <tr><td>正品</td><td>批号（LOT）、有效期、供应商、开封确认</td></tr>
+        <tr><td>计划</td><td>各部位的计划用量</td></tr>
+        <tr><td>配制</td><td>稀释液 · 水化液、加入量、最终浓度</td></tr>
+        <tr><td>实际使用</td><td>Unit · mL · vial · mg · line · pulse</td></tr>
+        <tr><td>设备</td><td>主机 · 治疗头 · 探头编号</td></tr>
+        <tr><td>差异</td><td>计划量与实际量的差异及原因</td></tr>
+        <tr><td>确认</td><td>担当医生 · 护理团队 · 患者确认</td></tr>
+      </table>
+    </div>
+  </div>
+
+  </div><!-- /pad -->
+
+  <div class="closing">
+    <p class="c-title">正品与剂量确认是什么</p>
+    <p>正品与剂量确认<strong>并不等于对安全性或治疗效果的保证</strong>。<br>
+    它是一套如实证明<strong>「使用了什么、使用了多少」</strong>的记录体系。</p>
+    <p>实际用量、治疗部位与能量参数，<br>最终由担当医生根据患者状态与安全性判断决定。</p>
+    <p class="c-sig">THEMIIN CLINIC · JEJU<br><span>THEMIIN 整形科 · 皮肤科</span></p>
+  </div>
+
+  <p class="foot">THEMIIN CLINIC · JEJU<br>本文件说明确认与记录的流程，不能替代现场诊疗与担当医生的个别判断。</p>
+</div>
+
+<a class="totop" href="#top">↑ 目录</a>
+
+</body>
+</html>
